@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<title>登录</title>
+<link rel="stylesheet" type="text/css" href="css/register.css"/>
+</head>
+<body>
+<!--banner-->
+	<div class="header">
+		<img class="imgs" src="img/201812051147217612.jpg" alt="" />
+		<div class="banner">
+			<a href="index/index.html">
+				<img class="logo" src="img/logo-1.f315fed.png" alt="" />
+			</a>
+			<form method="post" class="box">
+				<img class="logo1" src="img/logo.d68beda.png.webp" alt="" />
+				<p>帐号登录</p>
+				
+				<div class="phone">
+					<div class="country">
+						<span style="font-size:16px;padding-left:13px">+86</span>
+						<img class="jian" src="img/arrow-down.42027c9.png" alt="" />
+						<!--<span>中国</span>     <span>+86</span><br/>
+						<span>India</span>    <span>+91</span>-->
+					</div>
+					
+					<input id="phone" name="userphone" type="text" placeholder="请输入手机号"/>
+				</div>
+				<div class="phone mMa">
+					<input id="pass" name="userpass" type="password" placeholder="请输入密码"/>
+					<img src="img/eyes-off.7c50935.png.webp" alt="" />
+				</div>
+				
+				<div class="txt">
+					<a href="#">邮箱/用户名登录</a>
+					<div class="check">
+						<div class="one">
+							<img class="rig" src="img/selected-icon.a90d513.png" alt=""/>	
+						</div>
+						<span>两周内自动登录</span>
+					</div>
+				</div>
+				<div class="ways">
+					<div class="deng"><input id="btn" type="submit" value="登录"/></div>
+					<div class="reg"><input type="button" onclick='location.href=("zhuce.html")' value="注册vivo帐号"/></div>
+					<div class="feg">忘记密码？</div>
+					<div class="way">-----------------------其他方式登录--------------------------</div>
+				</div>
+				<div class="login">
+					<a href="#"><img src="img/QQ.dca07e2.png" alt="" /></a>
+					<a href="#"><img src="img/weixin.2360293.png" alt="" /></a>
+					<a href="#"><img src="img/zhifubao.5349adf.png" alt="" /></a>
+					<a href="#"><img src="img/weibo.d8c0561.png" alt="" /></a>
+					<a href="#"><img src="img/renren.6be0149.png" alt="" /></a>
+				</div>
+			</form>	
+		</div>
+	</div>
+<!--footer-->
+<div class="footer">
+	<div class="topB">
+		<a href="#">
+			<img src="img/online-service.0c3db86.png.webp" alt="" />
+			<span>在线客服</span>
+		</a>
+		<img src="img/tel.8e75c45.png.webp" alt="" />
+		<span>400-678-9688(24小时全国服务热线)</span>
+	</div>
+	<p>COPYRIGHT ©2011-2018 广东步步高电子工业有限公司 版权所有 保留一切权利 | 隐私政策 | 法律声明 | 粤B2-20080267 | 粤ICP备05100288号</p>	
+</div>
+</body>
+</html>
+<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+<script type="text/javascript" src="js/cookieTools.js"></script>
+<script type="text/javascript" src="js/tools.js"></script>
+<script type="text/javascript">
+	$(".check .one").click(function(){
+		$(this).children().css({"display":"block"});
+	});
+//	$(".check .one").click(function(){
+//		$(this).children().css({"display":"none"});
+//	});
+
+	$(".box .txt a").click(function(){
+		$(".box .phone .country").css({"display":"none"});
+//		$(".box .phone input").html("请输入邮箱/用户名");
+		
+	});
+	
+//	$(".reg").click(function(){
+//		$(".reg").attr("a",{});
+//	})
+
+	$(function(){		
+		$("#btn").click(function(){
+			//1、
+			$.post(
+				"reg.php",
+				{
+					"userphone":$("#phone").val(),
+					"userpass":$("#pass").val()
+				},
+				function(data){					
+					if(data=="1"){//登录成功！
+						//记录cookie
+						saveCookie("userphone",$("#phone").val(),7);
+						location.href="../index/index.html";
+					}else{
+						alert("登录失败，用户名或者密码不对！");
+						location.href="register.html";
+					}
+				}
+			);
+		});
+	});
+	
+</script>

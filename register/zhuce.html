@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>注册</title>
+<link rel="stylesheet" href="css/zhuce.css" />
+</head>
+<body>
+<div class="box">
+	<a href="index/index.html">
+		<img class="logo1" src="img/logo.d68beda.png.webp" alt="" />
+	</a>
+	<p class="login">帐号登录</p>
+	<form id="foom">
+		<select name="" id="">
+			<option value="">中国</option>
+			<option value="">澳大利亚</option>
+			<option value="">美国</option>
+		</select>
+		<span class="spa">成功注册帐号后，国家／地区将不能被修改</span>
+		<div class="phone">
+			<p class="country">
+				<span>+86</span>
+				<img class="jian" src="img/arrow-down.42027c9.png" alt="" />
+			</p>
+			<input id="phone" name="userphone" type="text" placeholder="请输入手机号"/>
+		</div>
+		<div class="phone" style="margin-top:10px;background:white">
+			<input style="background:white;" id="pass" name="userpass" type="text" placeholder="请输入密码"/>
+		</div>
+		<div id="one"></div>
+		<div class="check">
+			<div class="one">
+				<img class="rig" src="img/selected-icon.a90d513.png" alt=""/>	
+			</div>
+			<p>我已阅读并接受 <a href="#">《vivo服务协议》</a></p>
+		</div>
+	</form>
+	<a class="next" id="next" href="#">下一步</a>
+</div>
+<div class="footer">
+	<div class="topB">
+		<a href="#">
+			<img src="img/online-service.0c3db86.png.webp" alt="" />
+			<span>在线客服</span>
+		</a>
+		<img src="img/tel.8e75c45.png.webp" alt="" />
+		<span>400-678-9688(24小时全国服务热线)</span>
+	</div>
+	<p>COPYRIGHT ©2011-2018 广东步步高电子工业有限公司 版权所有 保留一切权利 | 隐私政策 | 法律声明 | 粤B2-20080267 | 粤ICP备05100288号</p>	
+</div>
+</body>
+</html>
+<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+<script>
+
+$("#foom #phone").blur(function(){
+	let reg=/^[1][3|5|8|7|9|4]([\d]{9})$/g;
+	if(reg.test(this.value)==true){
+		$("#one").html("");
+		$(".next").click(function(){
+			window.location.href="register.html";
+		});
+	}else{
+		$("#one").html("请输入正确的手机号码");
+	}
+});
+
+
+	$(function(){		
+		//验证用户名是否存在
+		$("#phone").blur(function(){
+			$.post(
+				"checkUser.php",
+				{
+					"userphone":$("#phone").val()	
+				},
+				function(data){
+					if(data=="1"){
+//						$("#one").html("√");
+						window.location.href="register.html";
+
+					}else{
+//						$("#one").html("×");
+						window.location.href="zhuce.html";
+					}
+				}				
+			);
+			
+		});
+		
+		$("#next").click(function(){
+			//1、
+			$.post(
+				"addUser01.php",
+				{
+					"userphone":$("#phone").val(),
+					"userpass":$("#pass").val()
+				},
+				function(data){					
+					
+				}
+			);
+		});
+	});
+	
+
+</script>
